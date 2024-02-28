@@ -1,21 +1,19 @@
 import store from "./store.mjs";
 
-const login = async (user, password) => {
+const login = async (req, res) => {
+    const { user, password } = req.body;
     try {
-        if (!user || !password) {
-            throw new Error('Usuario y contraseña son requeridos');
-        }
-
         const userData = await store.getUserAndPassword(user);
-
-        if (userData.password === password) {
-            return { mensaje: 'Inicio de sesión exitoso' };
+        if (userData.password !== password) {
+            res.status(401).send('Invalid user or password');
         } else {
-            throw new Error('Usuario o contraseña incorrectos');
+            res.status(200).send('Login successful');
         }
     } catch (error) {
-        throw new Error('Error en la autenticación: ' + error.message);
+        res.status(500).send(error.message);
     }
-}
+};
+
+// rest of your code...
 
 export default login;
