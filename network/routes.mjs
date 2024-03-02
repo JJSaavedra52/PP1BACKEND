@@ -1,7 +1,9 @@
-import login from '../components/login/controller.mjs';
+import { router } from "../components/user/network.mjs";
+
+const user = router;
 
 const routes = (server) => {
-    server.use('/login', login);
-}
+    server.use('/user', user);
+};
 
 export default routes;
