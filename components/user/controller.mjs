@@ -18,7 +18,6 @@ const login = async (req, res) => {
     }
 };
 
-
 // Lógica para el controlador de register
 const register = async (req, res) => {
     const { user, password } = req.body;
@@ -34,9 +33,6 @@ const register = async (req, res) => {
         res.status(500).send('Error interno'); // Envía un mensaje de error genérico con código 500 (Internal Server Error)
     }
 };
-
-
-
 
 export { login, register };
 
