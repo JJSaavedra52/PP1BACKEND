@@ -1,12 +1,12 @@
-#**Requisitos funcionales y no funcionales del backend:**
+# **Requisitos funcionales y no funcionales del backend:**
 
-##**Requisitos Funcionales:**
+## **Requisitos Funcionales:**
 
 1. Autenticación de Usuarios: Los usuarios deben poder registrarse e iniciar sesión en la aplicación para acceder a sus tareas.
 2. Gestión de Tareas: Los usuarios deben poder crear, leer, actualizar y eliminar tareas. Esto incluye la asignación de tareas a usuarios específicos, la definición de fechas límite, la priorización de tareas, etc.
 3. Filtrado y Búsqueda de Tareas: Los usuarios deben poder filtrar y buscar tareas según diversos criterios, como el estado (pendiente, completada).
 
-##**Requisitos No Funcionales:**
+## **Requisitos No Funcionales:**
 
 1. Seguridad: La aplicación debe garantizar la seguridad de los datos del usuario.
 2. Escalabilidad: La aplicación debe ser capaz de manejar un aumento en la carga de trabajo a medida que más usuarios se registran y utilizan la aplicación.
