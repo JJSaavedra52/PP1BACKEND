@@ -10,5 +10,5 @@
 
 1. Seguridad: La aplicación debe garantizar la seguridad de los datos del usuario.
 2. Escalabilidad: La aplicación debe ser capaz de manejar un aumento en la carga de trabajo a medida que más usuarios se registran y utilizan la aplicación.
-3. Rendimiento: La aplicación debe responder de manera rápida y eficiente, incluso bajo cargas de trabajo pesadas y al manejar grandes cantidades de datos. 
+3. Rendimiento: La aplicación debe responder de manera rápida y eficiente, incluso bajo cargas de trabajo pesadas y al manejar grandes cantidades de datos.
 4. Disponibilidad: La aplicación debe estar disponible y accesible en todo momento, con un tiempo de inactividad mínimo planificado para mantenimiento o actualizaciones.

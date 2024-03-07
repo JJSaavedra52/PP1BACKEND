@@ -1,27 +1,27 @@
 import { isCorrectPassword, saveUser } from './store.mjs';
 
-// Lógica para el controlador de login
-const login = async (body) => {
-    const { user, password } = body;
-    if (!user || !password) {
-        throw { status: 400, message: 'Faltan datos' };
+// Lógica para el controlador de inicio de sesión
+const login = async (body) => { // La función asincrónica toma el cuerpo de la solicitud como argumento
+    const { user, password } = body; // Extrae el usuario y la contraseña del cuerpo de la solicitud
+    if (!user || !password) { // Verifica si el usuario o la contraseña están ausentes
+        throw { status: 400, message: 'Faltan datos' }; // Lanza un error con el estado 400 (Bad Request) y un mensaje
     }
-    const isAuthenticated = await isCorrectPassword(user, password);
-    if (isAuthenticated) {
-        return { status: 200, message: 'Usuario logeado correctamente' };
-    } else {
-        throw { status: 401, message: 'Usuario o contraseña incorrectos' };
+    const isAuthenticated = await isCorrectPassword(user, password); // Verifica si el usuario y la contraseña son correctos
+    if (isAuthenticated) { // Si la autenticación es exitosa
+        return { status: 200, message: 'Usuario logeado correctamente' }; // Devuelve un objeto con el estado 200 (OK) y un mensaje de éxito
+    } else { // Si la autenticación falla
+        throw { status: 401, message: 'Usuario o contraseña incorrectos' }; // Lanza un error con el estado 401 (Unauthorized) y un mensaje de error
     }
 };
 
-// Lógica para el controlador de register
-const register = async (body) => {
-    const { user, password } = body;
-    const result = await saveUser(user, password);
-    if (result === 'Nombre de usuario ya registrado') {
-        throw { status: 400, message: result };
-    } else {
-        return { status: 201, message: result };
+// Lógica para el controlador de registro
+const register = async (body) => { // La función asincrónica toma el cuerpo de la solicitud como argumento
+    const { user, password } = body; // Extrae el usuario y la contraseña del cuerpo de la solicitud
+    const result = await saveUser(user, password); // Guarda el usuario y la contraseña en la base de datos
+    if (result === 'Nombre de usuario ya registrado') { // Si el usuario ya está registrado
+        throw { status: 400, message: result }; // Lanza un error con el estado 400 (Bad Request) y un mensaje de error
+    } else { // Si el registro es exitoso
+        return { status: 201, message: result }; // Devuelve un objeto con el estado 201 (Created) y un mensaje de éxito
     }
 };
 
