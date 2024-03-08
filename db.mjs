@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 export const startConnection = async () => {
   try {
-    const url = encodeURI('mongodb+srv://brray94:XqQkyhznTGQiT2O6@proyectopi.fpahdt6.mongodb.net/?retryWrites=true&w=majority&appName=proyectoPI');
+    const url = encodeURI(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_NAME}?retryWrites=true&w=majority`);
     await mongoose.connect(url);
     console.log('Conexión establecida con la base de datos');
   } catch (error) {
