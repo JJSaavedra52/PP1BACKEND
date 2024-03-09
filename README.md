@@ -1,3 +1,15 @@
+# Nota
+Sabemos que por buenas practicas el .env no se versiona, pero para este caso lo hemos incluido para que pueda ejecutarlo sin problemas.
+
+# Requisitos funcionales de OurTask
+## Equipo: 
+- Santiago Campiño Tamayo
+- Jhuly Andrea Vivas Vivas
+- Jhojan Stiven Espinosa Montes
+- Brayan David Maca Mancancela
+- Juan José Saavedra Realpe
+#
+
 # **Requisitos funcionales y no funcionales del backend:**
 
 ## **Requisitos Funcionales:**
