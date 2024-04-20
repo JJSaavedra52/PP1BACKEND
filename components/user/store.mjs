@@ -20,10 +20,21 @@ export const isCorrectPassword = async (user, password) => {
     }
 };
 
-
-export const saveUser = async (user, password) => {
+export const getUserName = async (user) => {
     try {
-        if (!user || !password) {
+        const foundUser = await User.findOne({ user });
+        if (!foundUser) {
+            return false; // Usuario no encontrado
+        }
+        return foundUser.name; // Devuelve el nombre del usuario
+    } catch (error) {
+        console.error('Error en getUserName:', error);
+        throw new Error('Error interno');
+    }
+};
+export const saveUser = async (user, name, password) => {
+    try {
+        if (!user || !name || !password) {
             throw new Error('Datos incorrectos');
         }
 
@@ -32,7 +43,7 @@ export const saveUser = async (user, password) => {
             return 'Nombre de usuario ya registrado';
         }
 
-        const newUser = new User({ user, password });
+        const newUser = new User({ user, name, password });
         await newUser.save();
         return 'Usuario registrado correctamente';
     } catch (error) {
