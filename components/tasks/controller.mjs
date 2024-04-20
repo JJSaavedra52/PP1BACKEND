@@ -1,8 +1,16 @@
 import { addTask, getTasks, updateTask, deleteTask } from "./store.mjs";
+import User from "../user/model.mjs";
 
 // Create (C)
 const add = async (req, res) => {
     const { userName, task } = req.body;
+
+    // Check if user exists
+    const user = await User.findOne({ user: userName });
+    if (!user) {
+        return res.status(400).json({ error: 'User does not exist' });
+    }
+
     try {
         const result = await addTask(userName, task);
         res.status(201).json(result);
@@ -11,7 +19,6 @@ const add = async (req, res) => {
     }
 };
 
-// Read (R)
 // Read (R)
 const get = async (req, res) => {
     const { userName } = req.body;
