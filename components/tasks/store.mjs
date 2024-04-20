@@ -2,13 +2,17 @@ import Task from "./model.mjs";
 
 // Create (C)
 export const addTask = async (userName, task) => {
-    try {
-        const newTask = new Task({ userName, tasks: task });
-        await newTask.save();
-        return 'Tarea añadida correctamente';
-    } catch (error) {
-        console.error('Error en addTask:', error);
-        throw error;
+    // Find the user document
+    const userTasks = await Task.findOne({ userName });
+
+    if (!userTasks) {
+        // If the user document doesn't exist, create a new one
+        const newUserTasks = new Task({ userName, tasks: [task] });
+        return newUserTasks.save();
+    } else {
+        // If the user document exists, push the new task into the tasks array
+        userTasks.tasks.push(task);
+        return userTasks.save();
     }
 };
 

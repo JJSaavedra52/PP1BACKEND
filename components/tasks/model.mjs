@@ -2,9 +2,10 @@ import mongoose from "mongoose";
 
 const taskSchema = new mongoose.Schema({
     userName: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: 'User',
-        required: true
+        required: true,
+        unique: true
     },
     tasks: [
         {
@@ -32,11 +33,9 @@ const taskSchema = new mongoose.Schema({
                 {
                     title: {
                         type: String,
-                        required: true
                     },
                     status: {
                         type: Boolean,
-                        required: true
                     }
                 }
             ]

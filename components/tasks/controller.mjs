@@ -5,43 +5,45 @@ const add = async (req, res) => {
     const { userName, task } = req.body;
     try {
         const result = await addTask(userName, task);
-        success(res, result, 201);
+        res.status(201).json(result);
     } catch (error) {
-        error(res, error, 400);
+        res.status(400).json({ error: error.message });
     }
 };
 
+// Read (R)
 // Read (R)
 const get = async (req, res) => {
     const { userName } = req.body;
     try {
         const tasks = await getTasks(userName);
-        success(res, tasks, 200);
+        res.status(200).json(tasks);
     } catch (error) {
-        error(res, error, 400);
+        res.status(400).json({ error: error.message });
     }
 };
 
 // Update (U)
-const update = async (req, res) => {
-    const { userName, task } = req.body;
-    try {
-        const result = await updateTask(userName, task);
-        success(res, result, 200);
-    } catch (error) {
-        error(res, error, 400);
-    }
-};
+// const update = async (req, res) => {
+//     const { userName, task } = req.body;
+//     try {
+//         const result = await updateTask(userName, task);
+//         res.status(200).json(result);
+//     } catch (error) {
+//         res.status(400).json({ error: error.message });
+//     }
+// };
 
 // Delete (D)
-const deleted = async (req, res) => {
-    const { userName, taskId } = req.body;
-    try {
-        const result = await deleteTask(userName, taskId);
-        success(res, result, 200);
-    } catch (error) {
-        error(res, error, 400);
-    }
-};
+// const deleted = async (req, res) => {
+//     const { userName, taskId } = req.body;
+//     try {
+//         const result = await deleteTask(userName, taskId);
+//         res.status(200).json(result);
+//     } catch (error) {
+//         res.status(400).json({ error: error.message });
+//     }
+// };
 
-export { add, get, update, deleted };
+export { add, get };
+// export { add, get, update, deleted };
