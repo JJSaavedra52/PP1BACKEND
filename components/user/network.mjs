@@ -14,9 +14,9 @@ router.get('/', (req, res) => {
 router.post('/login', (req, res) => {
     // Llama a la función de controlador de inicio de sesión con los datos del cuerpo de la solicitud
     controller.login(req.body)
-        .then(({ status, message }) => {
+        .then(({ status, message, userName }) => {
             // Envia una respuesta de éxito con el mensaje y el estado devueltos por el controlador
-            success(res, message, status);
+            success(res, message, status, userName);
         })
         .catch(({ status, message }) => {
             // Envia una respuesta de error con el mensaje y el estado devueltos por el controlador
