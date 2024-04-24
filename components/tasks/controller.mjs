@@ -9,14 +9,16 @@ const add = async (req, res) => {
     // Check if user exists
     const user = await User.findOne({ user: userName });
     if (!user) {
-        return res.status(400).json({ error: 'User does not exist' });
+        throw { status: 400, message: 'User does not exist' };
     }
 
     try {
         const result = await addTask(userName, task);
-        res.status(201).json(result);
+        //If we put result in the returning message it will
+        //show all the tasks plus the one added in the bottom
+        return { status: 201, message: result };
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        throw { status: 400, message: error.message };
     }
 };
 
@@ -28,9 +30,9 @@ const get = async (req, res) => {
         if (!userTasks) {
             return res.status(404).json({ error: 'No tasks found for this user' });
         }
-        res.status(200).json(userTasks.tasks);
+        return { status: 200, message: userTasks.tasks };
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        throw { status: 400, message: error.message };
     }
 };
 
