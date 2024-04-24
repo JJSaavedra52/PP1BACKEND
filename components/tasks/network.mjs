@@ -1,12 +1,12 @@
 import { Router } from 'express';
 import { success, error } from '../../network/response.mjs';
-import { add, get} from './controller.mjs';
+import { add, get, getTaskById} from './controller.mjs';
 // import { error as errorResponse } from '../../network/response.mjs';
 
 // import { add, get, update, deleted} from './controller.mjs';
 
 const router = Router(); // Inicializa el enrutador de Express
-const controller = { add, get }; // Objeto que contiene las funciones de controlador importadas
+const controller = { add, get, getTaskById }; // Objeto que contiene las funciones de controlador importadas
 // const controller = { add, get, update, deleted }; // Objeto que contiene las funciones de controlador importadas
 
 
@@ -29,6 +29,16 @@ router.post('/addTask', (req, res) => {
 // Ruta para el método POST en /tasks/getTasks (R)
 router.post('/getTasks', (req, res) => {
     controller.get(req, res)
+        .then((message) => {
+            success(res, message, 200);
+        })
+        .catch((err) => {
+            error(res, 'Error interno', 500, err.message);
+        });
+});
+
+router.get('/getTaskById/:taskId', (req, res) => {
+    controller.getTaskById(req, res)
         .then((message) => {
             success(res, message, 200);
         })

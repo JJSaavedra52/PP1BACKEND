@@ -26,7 +26,6 @@ export const getTasks = async (user) => {
         throw error;
     }
 };
-
 // Update (U)
 export const updateTask = async (user, task) => {
     try {
