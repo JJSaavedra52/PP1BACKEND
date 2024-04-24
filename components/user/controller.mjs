@@ -10,7 +10,7 @@ const login = async (body) => { // La función asincrónica toma el cuerpo de la
     if (isAuthenticated) { // Si la autenticación es exitosa
         const name = await getUserName(user); // Obtiene el nombre del usuario
         console.log('Bienvenido', name); // Muestra un mensaje de bienvenida en la consola
-        return {status: 200, message: `Usuario ${name} logeado correctamente`, userName: name}; // Devuelve un objeto con el estado 200 (OK) y un mensaje de éxito
+        return {status: 200, message: `Usuario ${name} logeado correctamente`, user: name}; // Devuelve un objeto con el estado 200 (OK) y un mensaje de éxito
     } else { // Si la autenticación falla
         throw { status: 401, message: 'Usuario o contraseña incorrectos' }; // Lanza un error con el estado 401 (Unauthorized) y un mensaje de error
     }

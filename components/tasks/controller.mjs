@@ -6,15 +6,18 @@ import Task from "./model.mjs";
 const add = async (req, res) => {
     const { user, task } = req.body;
 
+    // console.log('Received user:', user); // Log the received user
+    // console.log('Received task:', task); // Log the received task
+
     // Check if user exists
     const foundUser = await User.findOne({ user: user });
+    // console.log('Found user:', foundUser); // Log the found user
+
     if (!foundUser) {
         throw { status: 400, message: 'User does not exist' };
     }
     try {
         const result = await addTask(user, task);
-        //If we put result in the returning message it will
-        //show all the tasks plus the one added in the bottom
         return { status: 201, message: result };
     } catch (error) {
         throw { status: 400, message: error.message };
