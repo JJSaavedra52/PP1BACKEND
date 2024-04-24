@@ -4,16 +4,15 @@ import Task from "./model.mjs";
 
 // Create (C)
 const add = async (req, res) => {
-    const { userName, task } = req.body;
+    const { user, task } = req.body;
 
     // Check if user exists
-    const user = await User.findOne({ user: userName });
-    if (!user) {
+    const foundUser = await User.findOne({ user: user });
+    if (!foundUser) {
         throw { status: 400, message: 'User does not exist' };
     }
-
     try {
-        const result = await addTask(userName, task);
+        const result = await addTask(user, task);
         //If we put result in the returning message it will
         //show all the tasks plus the one added in the bottom
         return { status: 201, message: result };
@@ -24,9 +23,9 @@ const add = async (req, res) => {
 
 // Read (R)
 const get = async (req, res) => {
-    const { userName } = req.body;
+    const { user } = req.body;
     try {
-        const userTasks = await Task.findOne({ userName });
+        const userTasks = await Task.findOne({ user });
         if (!userTasks) {
             return res.status(404).json({ error: 'No tasks found for this user' });
         }
@@ -38,9 +37,9 @@ const get = async (req, res) => {
 
 // Update (U)
 // const update = async (req, res) => {
-//     const { userName, task } = req.body;
+//     const { user, task } = req.body;
 //     try {
-//         const result = await updateTask(userName, task);
+//         const result = await updateTask(user, task);
 //         res.status(200).json(result);
 //     } catch (error) {
 //         res.status(400).json({ error: error.message });
@@ -49,9 +48,9 @@ const get = async (req, res) => {
 
 // Delete (D)
 // const deleted = async (req, res) => {
-//     const { userName, taskId } = req.body;
+//     const { user, taskId } = req.body;
 //     try {
-//         const result = await deleteTask(userName, taskId);
+//         const result = await deleteTask(user, taskId);
 //         res.status(200).json(result);
 //     } catch (error) {
 //         res.status(400).json({ error: error.message });

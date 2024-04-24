@@ -1,13 +1,13 @@
 import Task from "./model.mjs";
 
 // Create (C)
-export const addTask = async (userName, task) => {
+export const addTask = async (user, task) => {
     // Find the user document
-    const userTasks = await Task.findOne({ userName });
+    const userTasks = await Task.findOne({ user });
 
     if (!userTasks) {
         // If the user document doesn't exist, create a new one
-        const newUserTasks = new Task({ userName, tasks: [task] });
+        const newUserTasks = new Task({ user, tasks: [task] });
         return newUserTasks.save();
     } else {
         // If the user document exists, push the new task into the tasks array
@@ -17,9 +17,9 @@ export const addTask = async (userName, task) => {
 };
 
 // Read (R)
-export const getTasks = async (userName) => {
+export const getTasks = async (user) => {
     try {
-        const tasks = await Task.find({ userName });
+        const tasks = await Task.find({ user });
         return tasks;
     } catch (error) {
         console.error('Error en getTasks:', error);
@@ -28,9 +28,9 @@ export const getTasks = async (userName) => {
 };
 
 // Update (U)
-export const updateTask = async (userName, task) => {
+export const updateTask = async (user, task) => {
     try {
-        await Task.updateOne({ userName, 'tasks.id': task.id }, { $set: { 'tasks.$': task } });
+        await Task.updateOne({ user, 'tasks.id': task.id }, { $set: { 'tasks.$': task } });
         return 'Tarea actualizada correctamente';
     } catch (error) {
         console.error('Error en updateTask:', error);
@@ -39,9 +39,9 @@ export const updateTask = async (userName, task) => {
 };
 
 // Delete (D)
-export const deleteTask = async (userName, taskId) => {
+export const deleteTask = async (user, taskId) => {
     try {
-        await Task.updateOne({ userName }, { $pull: { tasks: { id: taskId } } });
+        await Task.updateOne({ user }, { $pull: { tasks: { id: taskId } } });
         return 'Tarea eliminada correctamente';
     } catch (error) {
         console.error('Error en deleteTask:', error);
