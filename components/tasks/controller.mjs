@@ -38,6 +38,24 @@ const get = async (req, res) => {
     }
 };
 
+const getTaskById = async (req, res) => {
+    const { taskId } = req.params; // req.params para obtener el ID de la tarea de los parámetros de la URL
+    try {
+        const userTask = await Task.findOne({ 'tasks._id': taskId }); // Busca la tarea por su ID
+        if (!userTask) {
+            return res.status(404).json({ error: 'Task not found' });
+        }
+        const task = userTask.tasks.find(task => task._id.toString() === taskId); // Encuentra la tarea específica dentro de las tareas del usuario
+        if (!task) {
+            return res.status(404).json({ error: 'Task not found' });
+        }
+        //return res.status(200).json(task);
+        return { status: 200, message: task };
+    } catch (error) {
+        throw { status: 400, message: error.message };
+    }
+};
+
 // Update (U)
 // const update = async (req, res) => {
 //     const { user, task } = req.body;
@@ -60,5 +78,5 @@ const get = async (req, res) => {
 //     }
 // };
 
-export { add, get };
+export { add, get, getTaskById };
 // export { add, get, update, deleted };
