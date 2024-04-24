@@ -1,7 +1,8 @@
-export const success = (res, message, status) => {
+export const success = (res, message, status, userName) => {
     res.status(status || 200).send({
         error: '',
-        message
+        message,
+        userName
     });
 };
 

@@ -4,6 +4,7 @@ import bcryptjs from "bcryptjs";
 // Definimos el esquema de usuario
 const userSchema = new mongoose.Schema({
     user: { type: String, required: true, unique: true },
+    name: { type: String, required: true },	
     password: { type: String, required: true }
 });
 
@@ -31,6 +32,5 @@ userSchema.methods.comparePassword = async function(password) {
         throw error;
     }
 };
-
 
 export default mongoose.model('User', userSchema);
