@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { success, error } from '../../network/response.mjs';
 import { add, get} from './controller.mjs';
+// import { error as errorResponse } from '../../network/response.mjs';
 
 // import { add, get, update, deleted} from './controller.mjs';
 
@@ -31,8 +32,8 @@ router.post('/getTasks', (req, res) => {
         .then((message) => {
             success(res, message, 200);
         })
-        .catch((error) => {
-            error(res, 'Error interno', 500, error);
+        .catch((err) => {
+            error(res, 'Error interno', 500, err.message);
         });
 });
 

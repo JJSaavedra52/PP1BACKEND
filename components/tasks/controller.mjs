@@ -1,5 +1,6 @@
 import { addTask, getTasks, updateTask, deleteTask } from "./store.mjs";
 import User from "../user/model.mjs";
+import Task from "./model.mjs";
 
 // Create (C)
 const add = async (req, res) => {
@@ -23,8 +24,11 @@ const add = async (req, res) => {
 const get = async (req, res) => {
     const { userName } = req.body;
     try {
-        const tasks = await getTasks(userName);
-        res.status(200).json(tasks);
+        const userTasks = await Task.findOne({ userName });
+        if (!userTasks) {
+            return res.status(404).json({ error: 'No tasks found for this user' });
+        }
+        res.status(200).json(userTasks.tasks);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
