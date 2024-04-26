@@ -27,7 +27,7 @@ router.post('/addTask', (req, res) => {
 })
 
 // Ruta para el método POST en /tasks/getTasks (R)
-router.post('/getTasks', (req, res) => {
+router.get('/getTasks/:user', (req, res) => {
     controller.get(req, res)
         .then((message) => {
             success(res, message, 200);

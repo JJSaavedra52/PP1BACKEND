@@ -26,7 +26,7 @@ const add = async (req, res) => {
 
 // Read (R)
 const get = async (req, res) => {
-    const { user } = req.body;
+    const { user } = req.params;
     try {
         const userTasks = await Task.findOne({ user });
         if (!userTasks) {
