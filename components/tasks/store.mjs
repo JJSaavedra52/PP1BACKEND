@@ -27,10 +27,10 @@ export const getTasks = async (user) => {
     }
 };
 // Update (U)
-export const updateTask = async (user, taskId, stepId, status) => {
+export const updateTask = async (taskId, stepId, status) => {
     try {
         // Buscar la tarea que contiene el step a actualizar
-        const existingTask = await Task.findOne({ user, 'tasks._id': taskId });
+        const existingTask = await Task.findOne({ 'tasks._id': taskId });
 
         if (!existingTask) {
             console.error('Tarea no encontrada');
@@ -52,7 +52,7 @@ export const updateTask = async (user, taskId, stepId, status) => {
 
         // Realizar la actualización
         await Task.updateOne(
-            { user, 'tasks._id': taskId },
+            { 'tasks._id': taskId },
             update,
             { arrayFilters }
         );

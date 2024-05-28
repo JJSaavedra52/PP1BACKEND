@@ -58,10 +58,10 @@ const getTaskById = async (req, res) => {
 
 //Update (U)
 const update = async (req, res) => {
-    const { user, taskId, stepId, status } = req.body;
+    const { taskId, stepId, status } = req.body;
     //console.log('Request body:', req.body); 
     try {
-        const result = await updateTask(user, taskId, stepId, status);
+        const result = await updateTask(taskId, stepId, status);
         return { status: 200, message: result };
     } catch (error) {
         res.status(400).json({ error: error.message });

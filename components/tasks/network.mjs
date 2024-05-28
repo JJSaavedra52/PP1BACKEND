@@ -48,7 +48,7 @@ router.get('/getTaskById/:taskId', (req, res) => {
 });
 
 // Ruta para el método POST en /tasks/updateTask (U)
-router.post('/updateTask', (req, res) => {
+router.post('/UpdateTaskStep', (req, res) => {
     controller.update(req, res)
         .then(({ status, message }) => {
             success(res, message, status);
