@@ -27,15 +27,43 @@ export const getTasks = async (user) => {
     }
 };
 // Update (U)
-export const updateTask = async (user, task) => {
+export const updateTask = async (user, taskId, stepId, status) => {
     try {
-        await Task.updateOne({ user, 'tasks.id': task.id }, { $set: { 'tasks.$': task } });
-        return 'Tarea actualizada correctamente';
+        // Buscar la tarea que contiene el step a actualizar
+        const existingTask = await Task.findOne({ user, 'tasks._id': taskId });
+
+        if (!existingTask) {
+            console.error('Tarea no encontrada');
+            return { status: 404, message: 'Tarea no encontrada' };
+        }
+
+        // Construir la consulta de actualización
+        const update = {
+            $set: {
+                'tasks.$[task].steps.$[step].status': status
+            }
+        };
+
+        // Especificar los filtros de array para identificar los elementos correctos
+        const arrayFilters = [
+            { 'task._id': taskId },
+            { 'step._id': stepId }
+        ];
+
+        // Realizar la actualización
+        await Task.updateOne(
+            { user, 'tasks._id': taskId },
+            update,
+            { arrayFilters }
+        );
+
+        return 'Estado del paso actualizado correctamente';
     } catch (error) {
         console.error('Error en updateTask:', error);
         throw error;
     }
 };
+
 
 // Delete (D)
 export const deleteTask = async (user, taskId) => {

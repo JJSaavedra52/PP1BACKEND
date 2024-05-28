@@ -56,16 +56,17 @@ const getTaskById = async (req, res) => {
     }
 };
 
-// Update (U)
-// const update = async (req, res) => {
-//     const { user, task } = req.body;
-//     try {
-//         const result = await updateTask(user, task);
-//         res.status(200).json(result);
-//     } catch (error) {
-//         res.status(400).json({ error: error.message });
-//     }
-// };
+//Update (U)
+const update = async (req, res) => {
+    const { user, taskId, stepId, status } = req.body;
+    //console.log('Request body:', req.body); 
+    try {
+        const result = await updateTask(user, taskId, stepId, status);
+        return { status: 200, message: result };
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
 
 // Delete (D)
 // const deleted = async (req, res) => {
@@ -78,5 +79,5 @@ const getTaskById = async (req, res) => {
 //     }
 // };
 
-export { add, get, getTaskById };
+export { add, get, getTaskById, update};
 // export { add, get, update, deleted };
