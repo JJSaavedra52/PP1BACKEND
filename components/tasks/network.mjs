@@ -1,12 +1,12 @@
 import { Router } from 'express';
 import { success, error } from '../../network/response.mjs';
-import { add, get, getTaskById, update} from './controller.mjs';
+import { add, get, getTaskById, update, deleted} from './controller.mjs';
 // import { error as errorResponse } from '../../network/response.mjs';
 
 // import { add, get, update, deleted} from './controller.mjs';
 
 const router = Router(); // Inicializa el enrutador de Express
-const controller = { add, get, getTaskById, update }; // Objeto que contiene las funciones de controlador importadas
+const controller = { add, get, getTaskById, update, deleted}; // Objeto que contiene las funciones de controlador importadas
 // const controller = { add, get, update, deleted }; // Objeto que contiene las funciones de controlador importadas
 
 
@@ -59,14 +59,14 @@ router.post('/UpdateTaskStep', (req, res) => {
 })
 
 // Ruta para el método POST en /tasks/deleteTask (D)
-// router.delete('/deleteTask', (req, res) => {
-//     controller.deleted(req, res)
-//         .then(({ status, message }) => {
-//             success(res, message, status);
-//         })
-//         .catch(({ status, message }) => {
-//             error(res, 'Error interno', status || 500, message);
-//         });
-// });
+router.delete('/deleteTask', (req, res) => {
+    controller.deleted(req, res)
+        .then(({ status, message }) => {
+            success(res, message, status);
+        })
+        .catch(({ status, message }) => {
+            error(res, 'Error interno', status || 500, message);
+        });
+});
 
 export { router };

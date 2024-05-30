@@ -68,7 +68,15 @@ export const updateTask = async (taskId, stepId, status) => {
 // Delete (D)
 export const deleteTask = async (user, taskId) => {
     try {
-        await Task.updateOne({ user }, { $pull: { tasks: { id: taskId } } });
+        // Buscar la tarea que se desea eliminar
+        const existingTask = await Task.findOne({ 'tasks._id': taskId });
+
+        if (!existingTask) {
+            console.error('Tarea no encontrada');
+            return { status: 404, message: 'Tarea no encontrada' };
+        }
+
+        await Task.updateOne({ user }, { $pull: { tasks: { _id: taskId } } });
         return 'Tarea eliminada correctamente';
     } catch (error) {
         console.error('Error en deleteTask:', error);
