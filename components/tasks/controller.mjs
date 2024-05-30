@@ -68,16 +68,16 @@ const update = async (req, res) => {
     }
 };
 
-// Delete (D)
-// const deleted = async (req, res) => {
-//     const { user, taskId } = req.body;
-//     try {
-//         const result = await deleteTask(user, taskId);
-//         res.status(200).json(result);
-//     } catch (error) {
-//         res.status(400).json({ error: error.message });
-//     }
-// };
+//Delete (D)
+const deleted = async (req, res) => {
+    const { user, taskId } = req.body;
+    try {
+        const result = await deleteTask(user, taskId);
+        return { status: 200, message: result };
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
 
-export { add, get, getTaskById, update};
+export { add, get, getTaskById, update, deleted};
 // export { add, get, update, deleted };
