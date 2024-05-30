@@ -70,12 +70,15 @@ const update = async (req, res) => {
 
 //Delete (D)
 const deleted = async (req, res) => {
-    const { user, taskId } = req.body;
+    const { taskId } = req.body;
     try {
-        const result = await deleteTask(user, taskId);
+        const result = await deleteTask(taskId);
+        if (!result) {
+            throw { status: 404, message: 'Tarea no encontrada' };
+        }
         return { status: 200, message: result };
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        throw { status: 400, message: error.message };
     }
 };
 
