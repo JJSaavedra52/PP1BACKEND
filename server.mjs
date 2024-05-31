@@ -14,8 +14,12 @@ const router = routes;
 // Crea una instancia de la aplicación Express
 var app = express();
 
-// Habilita CORS en la aplicación
-app.use(cors());
+// Configure CORS
+app.use(cors({
+  origin: '*', // Allow all origins
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow these HTTP methods
+  allowedHeaders: ['Content-Type', 'Authorization'] // Allow these headers
+}));
 
 // Configura el middleware bodyParser para analizar datos JSON en las solicitudes HTTP
 app.use(bodyParser.json());
