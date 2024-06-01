@@ -5,6 +5,8 @@ import cors from 'cors';
 import { startConnection } from './db.mjs';
 import dotenv from 'dotenv';
 
+//Comentario para el main
+
 // Carga las variables de entorno del archivo .env en process.env
 dotenv.config();
 
