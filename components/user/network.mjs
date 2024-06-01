@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { success, error } from '../../network/response.mjs';
 import { login, register } from './controller.mjs';
 
+//Comentario de prueba
 const router = Router(); // Inicializa el enrutador de Express
 const controller = { login, register }; // Objeto que contiene las funciones de controlador importadas
 
