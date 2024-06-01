@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { success, error } from '../../network/response.mjs';
 import { login, register } from './controller.mjs';
 
+//Comentario de prueba
 const router = Router(); // Inicializa el enrutador de Express
 const controller = { login, register }; // Objeto que contiene las funciones de controlador importadas
 
@@ -14,9 +15,9 @@ router.get('/', (req, res) => {
 router.post('/login', (req, res) => {
     // Llama a la función de controlador de inicio de sesión con los datos del cuerpo de la solicitud
     controller.login(req.body)
-        .then(({ status, message }) => {
+        .then(({ status, message, userName }) => {
             // Envia una respuesta de éxito con el mensaje y el estado devueltos por el controlador
-            success(res, message, status);
+            success(res, message, status, userName);
         })
         .catch(({ status, message }) => {
             // Envia una respuesta de error con el mensaje y el estado devueltos por el controlador
